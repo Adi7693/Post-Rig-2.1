@@ -5,16 +5,30 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostRig2.1", "PostRig2.1\PostRig2.1.csproj", "{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Component Library", "ComponentLibrary\Component Library.csproj", "{82518B05-03C4-4926-AE97-3595842D50AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Debug|x64.ActiveCfg = Debug|x64
 		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Debug|x64.Build.0 = Debug|x64
+		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Release|Any CPU.ActiveCfg = Release|x64
 		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Release|x64.ActiveCfg = Release|x64
 		{6A3B7942-21E2-4FD5-849F-0FA46C50FA0A}.Release|x64.Build.0 = Release|x64
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{82518B05-03C4-4926-AE97-3595842D50AA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

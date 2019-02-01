@@ -50,15 +50,12 @@
             this.DesignRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.BodyDesignPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.SuspDesignPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.PropertiesTreeList = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.DesignTreelist = new DevExpress.XtraTreeList.TreeList();
             this.DesignTreelistColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
             this.SpringCheckItem = new DevExpress.XtraBars.BarCheckItem();
             this.DamperCheckItem = new DevExpress.XtraBars.BarCheckItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbonControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PropertiesTreeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DesignTreelist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,6 +210,7 @@
             "New",
             "Import",
             "Export"});
+            this.DamperBarListItem.ListItemClick += new DevExpress.XtraBars.ListItemClickEventHandler(this.DamperBarListItem_ListItemClick);
             // 
             // SpringBarlistItem
             // 
@@ -225,6 +223,7 @@
             "New",
             "Import",
             "Export"});
+            this.SpringBarlistItem.ListItemClick += new DevExpress.XtraBars.ListItemClickEventHandler(this.SpringBarlistItem_ListItemClick);
             // 
             // BodyBarListItem
             // 
@@ -260,53 +259,13 @@
             this.SuspDesignPageGroup.Name = "SuspDesignPageGroup";
             this.SuspDesignPageGroup.Text = "Suspension";
             // 
-            // PropertiesTreeList
-            // 
-            this.PropertiesTreeList.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Flat;
-            this.PropertiesTreeList.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumn1});
-            this.PropertiesTreeList.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.PropertiesTreeList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PropertiesTreeList.Location = new System.Drawing.Point(0, 143);
-            this.PropertiesTreeList.LookAndFeel.SkinName = "DevExpress Dark Style";
-            this.PropertiesTreeList.Name = "PropertiesTreeList";
-            this.PropertiesTreeList.BeginUnboundLoad();
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Post Rig Project"}, -1);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Components Library"}, 0);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Body"}, 1);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Spring"}, 1);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Damper"}, 1);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "CoilOver"}, 1);
-            this.PropertiesTreeList.AppendNode(new object[] {
-            "Setup"}, 0);
-            this.PropertiesTreeList.EndUnboundLoad();
-            this.PropertiesTreeList.OptionsView.AutoWidth = false;
-            this.PropertiesTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
-            this.PropertiesTreeList.Size = new System.Drawing.Size(400, 739);
-            this.PropertiesTreeList.TabIndex = 2;
-            // 
-            // treeListColumn1
-            // 
-            this.treeListColumn1.Caption = "treeListColumn1";
-            this.treeListColumn1.FieldName = "treeListColumn1";
-            this.treeListColumn1.Name = "treeListColumn1";
-            this.treeListColumn1.Visible = true;
-            this.treeListColumn1.VisibleIndex = 0;
-            this.treeListColumn1.Width = 175;
-            // 
             // DesignTreelist
             // 
             this.DesignTreelist.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.DesignTreelistColumn});
             this.DesignTreelist.Cursor = System.Windows.Forms.Cursors.Default;
             this.DesignTreelist.Dock = System.Windows.Forms.DockStyle.Left;
-            this.DesignTreelist.Location = new System.Drawing.Point(400, 143);
+            this.DesignTreelist.Location = new System.Drawing.Point(0, 143);
             this.DesignTreelist.Name = "DesignTreelist";
             this.DesignTreelist.BeginUnboundLoad();
             this.DesignTreelist.AppendNode(new object[] {
@@ -326,11 +285,10 @@
             this.DesignTreelist.EndUnboundLoad();
             this.DesignTreelist.OptionsView.AutoWidth = false;
             this.DesignTreelist.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
-            this.DesignTreelist.OptionsView.ShowButtons = false;
             this.DesignTreelist.OptionsView.ShowHorzLines = false;
             this.DesignTreelist.OptionsView.ShowIndicator = false;
             this.DesignTreelist.OptionsView.ShowVertLines = false;
-            this.DesignTreelist.Size = new System.Drawing.Size(400, 739);
+            this.DesignTreelist.Size = new System.Drawing.Size(281, 739);
             this.DesignTreelist.TabIndex = 3;
             // 
             // DesignTreelistColumn
@@ -372,14 +330,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 882);
             this.Controls.Add(this.DesignTreelist);
-            this.Controls.Add(this.PropertiesTreeList);
             this.Controls.Add(this.MainRibbonControl);
             this.Name = "Mainform";
             this.Ribbon = this.MainRibbonControl;
             this.Text = "Post Rig v2.1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbonControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PropertiesTreeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DesignTreelist)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -391,8 +347,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage HomeRibbonPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup HomeRibbonNewGroup;
         private DevExpress.XtraBars.Ribbon.RibbonControl MainRibbonControl;
-        private DevExpress.XtraTreeList.TreeList PropertiesTreeList;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.TreeList DesignTreelist;
         private DevExpress.XtraTreeList.Columns.TreeListColumn DesignTreelistColumn;
         private DevExpress.XtraBars.BarCheckItem barCheckItem2;
