@@ -84,6 +84,7 @@
             this.NewProjectButton.Name = "NewProjectButton";
             this.NewProjectButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.NewProjectButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.NewProjectButton_ItemClick);
             // 
             // OpenSaveHomePageGroup
             // 
@@ -203,6 +204,7 @@
             // 
             this.DamperBarListItem.Caption = "Damper";
             this.DamperBarListItem.Id = 28;
+            this.DamperBarListItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("DamperBarListItem.ImageOptions.Image")));
             this.DamperBarListItem.Name = "DamperBarListItem";
             this.DamperBarListItem.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
@@ -216,6 +218,7 @@
             // 
             this.SpringBarlistItem.Caption = "Spring";
             this.SpringBarlistItem.Id = 29;
+            this.SpringBarlistItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SpringBarlistItem.ImageOptions.Image")));
             this.SpringBarlistItem.Name = "SpringBarlistItem";
             this.SpringBarlistItem.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
@@ -229,6 +232,7 @@
             // 
             this.BodyBarListItem.Caption = "Body";
             this.BodyBarListItem.Id = 30;
+            this.BodyBarListItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("BodyBarListItem.ImageOptions.Image")));
             this.BodyBarListItem.Name = "BodyBarListItem";
             this.BodyBarListItem.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
@@ -290,6 +294,7 @@
             this.DesignTreelist.OptionsView.ShowVertLines = false;
             this.DesignTreelist.Size = new System.Drawing.Size(281, 739);
             this.DesignTreelist.TabIndex = 3;
+            this.DesignTreelist.DoubleClick += new System.EventHandler(this.TreeListNode_DoubleClick);
             // 
             // DesignTreelistColumn
             // 

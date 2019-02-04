@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VehicleComponentType.cs" />
+    <Compile Include="VehicleComponent.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Damper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

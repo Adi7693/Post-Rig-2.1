@@ -18,8 +18,7 @@ namespace PostRig2._1
         private bool SpringNeedsToAdd = false;
         private bool DamperNeedsToAdd = false;
 
-
-        Project project = new Project();
+        private Project CurrentProject { get; set; } = new Project();
 
         public Mainform()
         {
@@ -27,107 +26,81 @@ namespace PostRig2._1
             DesignTreelist.ExpandAll();
         }
 
-        /* Check why this code does not work. It does not display the name as defined but just "Mainform".
+        /*Check why this code does not work. It does not display the name as defined but just "Mainform".*/
         
-        private string GiveName(TreeList treeList)
+        private string GiveName()
         {
+            string name = string.Empty;
+
             if (BodyNeedsToAdd)
             {
-                string Name = "Body " + treeList.Nodes[0].Nodes[0].Nodes[0].Nodes.Count.ToString();
+                name = "Body " + DesignTreelist.Nodes[0].Nodes[0].Nodes[0].Nodes.Count.ToString();
             }
 
             else if (SpringNeedsToAdd)
             {
-                string Name = "Spring " + treeList.Nodes[0].Nodes[0].Nodes[1].Nodes.Count.ToString();
+                name = "Spring " + DesignTreelist.Nodes[0].Nodes[0].Nodes[1].Nodes.Count.ToString();
             }
 
             else if (DamperNeedsToAdd)
             {
-                string Name = "Damper " + treeList.Nodes[0].Nodes[0].Nodes[2].Nodes.Count.ToString();
+                name = "Damper " + DesignTreelist.Nodes[0].Nodes[0].Nodes[2].Nodes.Count.ToString();
             }
 
-            return Name;
+            
+            return name;
         }
-        */
+        
 
-        private string BodyName(TreeList treeList)
+        private void CreateTemplate()
         {
-            string bodyName = "Body " + treeList.Nodes[0].Nodes[0].Nodes[0].Nodes.Count.ToString();
 
-            return bodyName;
-        }
-
-        private string SpringName (TreeList treeList)
-        {
-            string springName = "Spring " + treeList.Nodes[0].Nodes[0].Nodes[1].Nodes.Count.ToString();
-
-            return springName;
         }
 
-        private string DamperName (TreeList treeList)
+        private void AddToTreeList(IVehicleComponent vehicleComponent)
         {
-            string damperName = "Damper " + treeList.Nodes[0].Nodes[0].Nodes[2].Nodes.Count.ToString();
+            DesignTreelist.BeginUnboundLoad();
 
-            return damperName;
-        }
+            TreeListNode ParentNodeForRoot = null;
 
-        private void AddToTreeList(TreeList treeList)
-        {
             if (BodyNeedsToAdd)
             {
-                treeList.BeginUnboundLoad();
-
-                TreeListNode ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[0];
-                TreeListNode NewBody = treeList.AppendNode(new object[] { null }, ParentNodeForRoot);
-
-                ParentNodeForRoot.LastNode.SetValue(DesignTreelistColumn, BodyName(DesignTreelist));
-
-                treeList.EndUnboundLoad();
-
-                BodyNeedsToAdd = false;
+                ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[0];
             }
-
-            if(SpringNeedsToAdd)
+            else if (SpringNeedsToAdd)
             {
-                treeList.BeginUnboundLoad();
-
-                TreeListNode ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[1];
-                TreeListNode NewSpring = treeList.AppendNode(new object[] { null }, ParentNodeForRoot);
-
-                ParentNodeForRoot.LastNode.SetValue(DesignTreelistColumn, SpringName(DesignTreelist));
-
-                treeList.EndUnboundLoad();
-
-                SpringNeedsToAdd = false;
+                ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[1];
             }
-
-            if (DamperNeedsToAdd)
+            else if (DamperNeedsToAdd)
             {
-                treeList.BeginUnboundLoad();
-
-                TreeListNode ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[2];
-                TreeListNode NewDamper = treeList.AppendNode(new object[] { null }, ParentNodeForRoot);
-
-                ParentNodeForRoot.LastNode.SetValue(DesignTreelistColumn, DamperName(DesignTreelist));
-
-                treeList.EndUnboundLoad();
-
-                DamperNeedsToAdd = false;
+                ParentNodeForRoot = DesignTreelist.Nodes[0].Nodes[0].Nodes[2];
             }
+
+            TreeListNode NewBody = DesignTreelist.AppendNode(new object[] { null }, ParentNodeForRoot, vehicleComponent);
+
+            
+
+            ParentNodeForRoot.LastNode.SetValue(DesignTreelistColumn, vehicleComponent.Name);
+
+            DesignTreelist.EndUnboundLoad();
 
             DesignTreelist.ExpandAll();
+
+            BodyNeedsToAdd = false;
+            SpringNeedsToAdd = false;
+            DamperNeedsToAdd = false;
         }
 
         private void NewBody()
         {
+            IVehicleComponent Body = new VehicleBody(CurrentProject.GetValidName(VehicleComponentType.Body));
+
             BodyNeedsToAdd = true;
-            project.BodyNeedsToAdd = true;
+            CurrentProject.BodyNeedsToAdd = true;
 
-            AddToTreeList(DesignTreelist);
+            AddToTreeList(Body);
 
-            string Body = DesignTreelist.Nodes[0].Nodes[0].Nodes[0].LastNode.GetValue(DesignTreelistColumn).ToString();
-
-            project.AddBody(Body);
+            CurrentProject.AddBody(Body);
         }
 
         private void ImportBody()
@@ -158,14 +131,14 @@ namespace PostRig2._1
 
         private void NewSpring()
         {
+            IVehicleComponent Spring = new Spring(CurrentProject.GetValidName(VehicleComponentType.Spring));
+
             SpringNeedsToAdd = true;
-            project.SpringNeedsToAdd = true;
+            CurrentProject.SpringNeedsToAdd = true;
 
-            AddToTreeList(DesignTreelist);
+            AddToTreeList(Spring);
 
-            string Spring = DesignTreelist.Nodes[0].Nodes[0].Nodes[1].LastNode.GetValue(DesignTreelistColumn).ToString();
-
-            project.AddSpring(Spring);
+            CurrentProject.AddSpring(Spring);
         }
 
         private void ImportSpring()
@@ -189,7 +162,7 @@ namespace PostRig2._1
                     ImportSpring();
                     break;
                 case 2:
-                    ImportDamper();
+                    ExportSpring();
                     break;
 
             }
@@ -198,14 +171,14 @@ namespace PostRig2._1
 
         private void NewDamper()
         {
+            IVehicleComponent Damper = new Damper(CurrentProject.GetValidName(VehicleComponentType.Damper));
+
             DamperNeedsToAdd = true;
-            project.DamperNeedsToAdd = true;
+            CurrentProject.DamperNeedsToAdd = true;
 
-            AddToTreeList(DesignTreelist);
+            AddToTreeList(Damper);
 
-            string Damper = DesignTreelist.Nodes[0].Nodes[0].Nodes[2].LastNode.GetValue(DesignTreelistColumn).ToString();
-
-            project.AddDamper(Damper);
+            CurrentProject.AddDamper(Damper);
         }
 
         private void ImportDamper()
@@ -231,6 +204,38 @@ namespace PostRig2._1
                 case 2:
                     ExportDamper();
                     break;
+            }
+        }
+
+        private DialogResult AskForSave()
+        {
+            string SaveStr = "Do you want to save the current project?";
+
+            return MessageBox.Show(SaveStr, "Post Rig 2.1", MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+        }
+
+        private void NewProjectButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (CurrentProject != null)
+            {
+                DialogResult res = AskForSave();
+
+                if (res == DialogResult.Yes)
+                {
+                    CurrentProject.Save();
+                }
+            }
+        }
+
+        private void TreeListNode_DoubleClick(object sender, EventArgs e)
+        {
+            TreeList tree = sender as TreeList;
+            TreeListHitInfo hi = tree.CalcHitInfo(tree.PointToClient(Control.MousePosition));
+            if (hi.Node != null && hi.Node.Tag != null)
+            {
+                
             }
         }
     }
